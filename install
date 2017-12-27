@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+source_dir="$(cd $(dirname ${BASH_SOURCE[0]}) && pwd)"
+cd "$source_dir"
+
+echo "Installing services"
+services="webcam-ghy99"
+for service in $services; do
+  skel="${service}.service.skel"
+  temp="${service}.service"
+  sudo sed "s#{{directory}}#${source_dir}#g" < $skel > $temp
+  sudo mv $temp /etc/systemd/system/
+done
+sudo systemctl daemon-reload
+
+echo "Enabling services"
+enabled_services="webcam-ghy99"
+for service in $enabled_services; do
+  sudo systemctl enable "$service"
+done
+
+echo "Install Complete!"

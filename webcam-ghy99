@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+source_dir="$(cd $(dirname ${BASH_SOURCE[0]}) && pwd)"
+cd "$source_dir"
+source credentials
+
+while true;
+do
+ wget -q --user ${USER} --password ${PASSWORD} ${HOST}/oneshotimage1?1445 -O /tmp/webcam-gh.jpg;
+ if [ $? == 0 ]; then
+  #convert -crop 640x480+160+60 /tmp/webcam-gh.jpg /tmp/webcam-gh-crop.jpg;
+  #mv -f /tmp/webcam-gh-crop.jpg ${OUTPUT_DIR}/webcam-crop.jpg;
+  mv -f /tmp/webcam-gh.jpg ${OUTPUT_DIR}/webcam.jpg;
+ fi
+ sleep 0.2;
+done

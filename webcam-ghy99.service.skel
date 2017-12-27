@@ -1,0 +1,14 @@
+[Unit]
+Description=GHY99 Webcam
+After=syslog.target
+
+[Service]
+Type=simple
+User=www-data
+ExecStart={{directory}}/webcam-ghy99
+WorkingDirectory={{directory}}
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
